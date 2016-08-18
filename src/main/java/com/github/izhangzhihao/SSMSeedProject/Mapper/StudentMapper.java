@@ -8,7 +8,11 @@ import java.util.List;
 public interface StudentMapper extends BaseMapper<Student> {
     List<Student> findAllStudents();
 
-    Student findStudentById(Integer id);
+    Student findStudentById(int id);
 
     void insertStudent(Student student);
+
+    void updateStudent(Student student);
+
+    void deleteStudent(int id);
 }

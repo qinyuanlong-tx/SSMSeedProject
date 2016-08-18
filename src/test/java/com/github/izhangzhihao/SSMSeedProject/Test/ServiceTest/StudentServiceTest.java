@@ -1,61 +1,36 @@
 package com.github.izhangzhihao.SSMSeedProject.Test.ServiceTest;
 
-import com.github.izhangzhihao.SSMSeedProject.Config.Application;
-import com.github.izhangzhihao.SSMSeedProject.Config.MyBatisConfig;
-import com.github.izhangzhihao.SSMSeedProject.Config.MyBatisMapperScannerConfig;
 import com.github.izhangzhihao.SSMSeedProject.Model.Student;
 import com.github.izhangzhihao.SSMSeedProject.Service.StudentService;
+import com.github.izhangzhihao.SSMSeedProject.Test.TestUtils.BaseTest;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
-import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration(classes = {
-        Application.class, MyBatisConfig.class, MyBatisMapperScannerConfig.class
-})
-@TestExecutionListeners({
-        DependencyInjectionTestExecutionListener.class,
-        DirtiesContextTestExecutionListener.class
-})
-public class StudentServiceTest
-{
+
+public class StudentServiceTest extends BaseTest {
+    @Autowired
     private static StudentService studentService;
-    @BeforeClass
-    public static void setup()
-    {
-        studentService = new StudentService();
-    }
+
     @Test
-    public void testFindAllStudents()
-    {
+    public void testFindAllStudents() {
         List<Student> students = studentService.findAllStudents();
         Assert.assertNotNull(students);
-        for (Student student : students)
-        {
-            System.out.println(student);
-        }
+        students.forEach(System.out::println);
     }
+
     @Test
-    public void testFindStudentById()
-    {
+    public void testFindStudentById() {
         Student student = studentService.findStudentById(1);
         Assert.assertNotNull(student);
         System.out.println(student);
     }
+
     @Test
-    public void testCreateStudent()
-    {
+    public void testCreateStudent() {
         Student student = new Student();
         int id = 3;
         student.setStudId(id);

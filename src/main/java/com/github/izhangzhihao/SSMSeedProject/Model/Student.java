@@ -16,4 +16,8 @@ public class Student {
     private String name;
     private String email;
     private Date dob;
+    public Student(String name,String email){
+        this.name=name;
+        this.email=email;
+    }
 }
