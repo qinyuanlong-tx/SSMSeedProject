@@ -3,9 +3,11 @@ package com.github.izhangzhihao.SSMSeedProject.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 
 import java.util.Date;
 
+@Alias("Student")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

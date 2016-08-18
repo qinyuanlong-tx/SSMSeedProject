@@ -14,13 +14,11 @@ public class StudentService {
     @Autowired
     StudentMapper studentMapper;
 
-
     public List<Student> findAllStudents() {
         return studentMapper.findAllStudents();
     }
 
     public Student findStudentById(Integer studId) {
-        log.debug("Select Student By ID :{}", studId);
         return studentMapper.findStudentById(studId);
     }
 

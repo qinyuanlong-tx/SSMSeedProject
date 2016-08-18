@@ -4,8 +4,9 @@ version '1.0-SNAPSHOT'
 buildscript {
     repositories {
         mavenLocal()
-        mavenCentral()
+        jcenter()
         maven { url "http://maven.oschina.net/content/groups/public/" }
+        mavenCentral()
         maven { url "http://repo.spring.io/release" }
         maven { url "https://repo.spring.io/libs-snapshot" }
     }

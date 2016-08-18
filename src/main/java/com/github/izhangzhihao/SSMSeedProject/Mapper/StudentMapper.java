@@ -5,9 +5,10 @@ import com.github.izhangzhihao.SSMSeedProject.Utils.BaseMapper;
 
 import java.util.List;
 
-public interface StudentMapper extends BaseMapper<Student>
-{
+public interface StudentMapper extends BaseMapper<Student> {
     List<Student> findAllStudents();
+
     Student findStudentById(Integer id);
+
     void insertStudent(Student student);
 }

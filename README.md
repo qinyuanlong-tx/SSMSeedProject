@@ -4,5 +4,5 @@
 
 # 主要的后端架构：
 
-    Spring + Spring MVC + MyBatis
+    Spring Boot + Spring MVC + MyBatis
     
