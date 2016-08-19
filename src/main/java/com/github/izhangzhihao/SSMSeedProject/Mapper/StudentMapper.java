@@ -1,11 +1,12 @@
 package com.github.izhangzhihao.SSMSeedProject.Mapper;
 
 import com.github.izhangzhihao.SSMSeedProject.Model.Student;
-import com.github.izhangzhihao.SSMSeedProject.Utils.BaseMapper;
 
 import java.util.List;
 
-public interface StudentMapper extends BaseMapper<Student> {
+//@Mapper 写了 @MapperScan("com.github.izhangzhihao.SSMSeedProject.Mapper") 之后就不用写了
+public interface StudentMapper {
+
     List<Student> findAllStudents();
 
     Student findStudentById(int id);
@@ -15,4 +16,8 @@ public interface StudentMapper extends BaseMapper<Student> {
     void updateStudent(Student student);
 
     void deleteStudent(int id);
+
+//    Student selectStudentWithAddress(int id);
+
+    Student findStudentByIdWithAddress(int id);
 }

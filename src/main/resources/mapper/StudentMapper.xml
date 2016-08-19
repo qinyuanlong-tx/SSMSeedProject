@@ -8,7 +8,21 @@
         <result property="name" column="name"/>
         <result property="email" column="email"/>
         <result property="dob" column="dob"/>
+        <!--<association property="address" column="addrid" select="com.github.izhangzhihao.SSMSeedProject.Mapper.AddressMapper.findAddressById"/>-->
     </resultMap>
+
+    <!--<resultMap type="Student" id="StudentWithAddressResult">
+        <id property="studId" column="stud_id" />
+        <result property="name" column="name" />
+        <result property="email" column="email" />
+        <result property="address.addrId" column="addrid" />
+        <result property="address.street" column="street" />
+        <result property="address.city" column="city" />
+        <result property="address.state" column="state" />
+        <result property="address.zip" column="zip" />
+        <result property="address.country" column="country" />
+    </resultMap>-->
+
     <select id="findAllStudents" resultMap="StudentResult">
         SELECT * FROM STUDENTS
     </select>
@@ -16,9 +30,10 @@
         SELECT STUD_ID AS STUDID, NAME, EMAIL, DOB
         FROM STUDENTS WHERE STUD_ID=#{Id}
     </select>
-    <insert id="insertStudent" parameterType="Student">
-        INSERT INTO STUDENTS(STUD_ID,NAME,EMAIL,DOB)
-        VALUES(#{studId},#{name},#{email},#{dob})
+    <insert id="insertStudent" parameterType="Student" useGeneratedKeys="true"
+            keyProperty="studId">
+        INSERT INTO STUDENTS(NAME,EMAIL,DOB)
+        VALUES(#{name},#{email},#{dob})
     </insert>
     <insert id="updateStudent" parameterType="Student">
         UPDATE STUDENTS SET NAME=#{name} , EMAIL =#{email}, DOB =#{dob}
@@ -28,4 +43,17 @@
         DELETE FROM STUDENTS
         WHERE STUD_ID = #{studId}
     </insert>
+
+    <!--<select id="selectStudentWithAddress" parameterType="int"
+            resultMap="StudentWithAddressResult">
+        SELECT STUD_ID, NAME, EMAIL, A.ADDRID, STREET, CITY, STATE,
+        ZIP, COUNTRY
+        FROM STUDENTS S LEFT OUTER JOIN ADDRESSES A ON
+        S.ADDR_ID=A.ADDR_ID
+        WHERE STUD_ID=#{studId}
+    </select>-->
+
+    <select id="findStudentByIdWithAddress" parameterType="int" resultType="Student">
+        SELECT * FROM STUDENTS WHERE STUD_ID=#{Id}
+    </select>
 </mapper>

@@ -1,11 +1,10 @@
 package com.github.izhangzhihao.SSMSeedProject.Config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.pagehelper.PageHelper;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
+@MapperScan("com.github.izhangzhihao.SSMSeedProject.Mapper")
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties") //导入资源文件
@@ -51,22 +50,22 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactoryBean() {
+    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(getDataSource());
         bean.setTypeAliasesPackage("com.github.izhangzhihao.SSMSeedProject.Model");
 
         //分页插件
-        PageHelper pageHelper = new PageHelper();
+        /*PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
         properties.setProperty("reasonable", "true");
         properties.setProperty("supportMethodsArguments", "true");
         properties.setProperty("returnPageInfo", "check");
         properties.setProperty("params", "count=countSql");
-        pageHelper.setProperties(properties);
+        pageHelper.setProperties(properties);*/
 
         //添加插件
-        bean.setPlugins(new Interceptor[]{pageHelper});
+        ///bean.setPlugins(new Interceptor[]{pageHelper});
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -77,6 +76,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+
     }
 
     @Bean
@@ -89,9 +89,4 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(getDataSource());
     }
-
-    /*@Bean
-    public StudentMapper getStudentMapper() {
-        return sqlSessionTemplate(sqlSessionFactoryBean()).getMapper(StudentMapper.class);
-    }*/
 }

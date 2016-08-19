@@ -8,18 +8,10 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @EnableCaching
 @SpringBootApplication(scanBasePackages = "com.github.izhangzhihao.SSMSeedProject")
-//@MapperScan("sample.mybatis.mapper")
 public class Application {
-
-    /*@Autowired
-    private CityMapper cityMapper;*/
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
-    /*@Override
-    public void run(String... args) throws Exception {
-        System.out.println(this.cityMapper.findByState("CA"));
-    }*/
 }
